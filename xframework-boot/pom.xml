@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xframework.boot</groupId>
-	<artifactId>parent</artifactId>
+	<artifactId>xframework-boot-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -19,8 +19,11 @@
 
 	<modules>
 		<module>exception</module>
-		<module>kaptcha</module>
 		<module>jdbc</module>
+		<module>kaptcha</module>
+		<module>security</module>
+		<module>stat</module>
+		<module>test</module>
 		<module>web</module>
 	</modules>
 
