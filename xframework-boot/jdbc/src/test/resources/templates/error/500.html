@@ -1,0 +1,20 @@
+<html>
+
+<head th:include="/common/meta::header(500)"></head>
+
+<body class="fourofour">
+	<!-- Login Screen -->
+	<div class="fourofour-container">
+		<h1>500</h1>
+		<h2>It looks like system occur some error,please try it later.</h2>
+		<a class="btn btn-lg btn-default-outline" href="@{/}"><i
+			class="icon-home"></i>Go to the homepage</a>
+	</div>
+	<div class="stack" th:style="${showTrace == true ? '' : 'display: none;'}" style="display: none;">
+		<pre th:text="${data.trace}">
+		</pre>
+	</div>
+	<!-- End Login Screen -->
+</body>
+
+</html>
