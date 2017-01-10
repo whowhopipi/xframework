@@ -11,7 +11,7 @@ import com.xframework.boot.web.service.impl.ApplicationVersionServiceImpl;
 @Configuration
 public class XframeworkWebConfiguration {
 
-	@Value("${xframework.app.version.current:1}")
+	@Value("${xframework.app.version.last:1}")
 	private int currentVersion;
 
 	@Bean
