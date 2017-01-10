@@ -34,6 +34,7 @@
 		<xframework-boot.version>0.0.1-SNAPSHOT</xframework-boot.version>
 		<kaptcha.version>0.0.9</kaptcha.version>
 		<lombok.version>0.9.2</lombok.version>
+		<poi.version>3.15</poi.version>
 	</properties>
 
 	<repositories>
@@ -42,7 +43,7 @@
 			<url>http://projectlombok.org/mavenrepo</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -78,6 +79,11 @@
 				<groupId>com.github.axet</groupId>
 				<artifactId>kaptcha</artifactId>
 				<version>${kaptcha.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${poi.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
