@@ -11,22 +11,40 @@ import org.apache.poi.ss.usermodel.Sheet;
 public interface ExcelSheetReadCallback {
 
 	/**
-	 * 读取一个Sheet
+	 * 读取一个Sheet开始
 	 * 
 	 * @param sheet
 	 * @param sheetIndex
 	 */
-	public void readOneSheet(Sheet sheet, int sheetIndex);
+	public void readOneSheetBegin(Sheet sheet, int sheetIndex);
+	
+	/**
+	 * 读取一个Sheet结束
+	 * 
+	 * @param sheet
+	 * @param sheetIndex
+	 */
+	public void readOneSheetEnd(Sheet sheet, int sheetIndex);
 
 	/**
-	 * 读取一行
+	 * 开始读取一行数据
 	 * 
 	 * @param sheet
 	 * @param row
 	 * @param sheetIndex
 	 * @param rowIndex
 	 */
-	public void readOneRow(Sheet sheet, Row row, int sheetIndex, int rowIndex);
+	public void readOneRowBegin(Sheet sheet, Row row, int sheetIndex, int rowIndex);
+
+	/**
+	 * 读取一行数据结束
+	 * 
+	 * @param sheet
+	 * @param row
+	 * @param sheetIndex
+	 * @param rowIndex
+	 */
+	public void readOneRowEnd(Sheet sheet, Row row, int sheetIndex, int rowIndex);
 
 	/**
 	 * 读取一个格

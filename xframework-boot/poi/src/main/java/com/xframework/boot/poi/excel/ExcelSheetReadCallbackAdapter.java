@@ -7,12 +7,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 public class ExcelSheetReadCallbackAdapter implements ExcelSheetReadCallback {
 
 	@Override
-	public void readOneSheet(Sheet sheet, int sheetIndex) {
+	public void readOneSheetBegin(Sheet sheet, int sheetIndex) {
 		// do nothing		
 	}
-
+	
 	@Override
-	public void readOneRow(Sheet sheet, Row row, int sheetIndex, int rowIndex) {
+	public void readOneSheetEnd(Sheet sheet, int sheetIndex) {
 		// do nothing		
 	}
 
@@ -23,6 +23,16 @@ public class ExcelSheetReadCallbackAdapter implements ExcelSheetReadCallback {
 
 	@Override
 	public void readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex, int cellIndex) {
+		// do nothing
+	}
+
+	@Override
+	public void readOneRowBegin(Sheet sheet, Row row, int sheetIndex, int rowIndex) {
+		// do nothing		
+	}
+
+	@Override
+	public void readOneRowEnd(Sheet sheet, Row row, int sheetIndex, int rowIndex) {
 		// do nothing		
 	}
 

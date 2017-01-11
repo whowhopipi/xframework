@@ -24,13 +24,13 @@ public class ExcelHelper {
 		for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
 			Sheet sheet = workbook.getSheetAt(sheetIndex);
 
-			callback.readOneSheet(sheet, sheetIndex);
+			callback.readOneSheetBegin(sheet, sheetIndex);
 
 			int maxRows = sheet.getPhysicalNumberOfRows();
 
 			for (int rowIndex = 0; rowIndex < maxRows; rowIndex++) {
 				Row row = sheet.getRow(rowIndex);
-				callback.readOneRow(sheet, row, sheetIndex, rowIndex);
+				callback.readOneRowBegin(sheet, row, sheetIndex, rowIndex);
 
 				short lastCellNum = row.getLastCellNum();
 
@@ -62,7 +62,10 @@ public class ExcelHelper {
 					}
 					callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex);
 				}
+				callback.readOneRowEnd(sheet, row, sheetIndex, rowIndex);
 			}
+			
+			callback.readOneSheetEnd(sheet, sheetIndex);
 		}
 	}
 
