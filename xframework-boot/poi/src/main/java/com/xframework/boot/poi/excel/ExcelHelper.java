@@ -18,17 +18,21 @@ public class ExcelHelper {
 	final public static String XLSX = ".xlsx";
 	final public static String XLSM = ".xlsm";
 
-	public static void readExcel(File file, ExcelSheetReadCallback callback) throws FileNotFoundException, IOException {
-		Workbook workbook = readWorkbook(file);
+	@SuppressWarnings("deprecation")
+	public static void readExcel(Workbook workbook, ExcelSheetReadCallback callback, int[] sheets, int[] startRow)
+			throws FileNotFoundException, IOException {
+		if (sheets.length != startRow.length) {
+			throw new RuntimeException("读取页和起始行，数目不一致。");
+		}
 
-		for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
+		for (int sheetIndex : sheets) {
 			Sheet sheet = workbook.getSheetAt(sheetIndex);
 
 			callback.readOneSheetBegin(sheet, sheetIndex);
 
 			int maxRows = sheet.getPhysicalNumberOfRows();
 
-			for (int rowIndex = 0; rowIndex < maxRows; rowIndex++) {
+			for (int rowIndex = startRow[sheetIndex]; rowIndex < maxRows; rowIndex++) {
 				Row row = sheet.getRow(rowIndex);
 				callback.readOneRowBegin(sheet, row, sheetIndex, rowIndex);
 
@@ -40,6 +44,8 @@ public class ExcelHelper {
 					callback.readOneCell(sheet, row, cell, sheetIndex, rowIndex, cellIndex);
 
 					String value = null;
+
+					// FIXME 待官方提供新的API
 					switch (cell.getCellTypeEnum()) {
 					case NUMERIC:
 						value = String.valueOf(cell.getNumericCellValue());
@@ -64,12 +70,27 @@ public class ExcelHelper {
 				}
 				callback.readOneRowEnd(sheet, row, sheetIndex, rowIndex);
 			}
-			
+
 			callback.readOneSheetEnd(sheet, sheetIndex);
 		}
 	}
 
-	private static Workbook readWorkbook(File file) throws FileNotFoundException, IOException {
+	public static void readExcel(Workbook workbook, ExcelSheetReadCallback callback)
+			throws FileNotFoundException, IOException {
+		int sheetNum = workbook.getNumberOfSheets();
+
+		int[] sheets = new int[sheetNum];
+		int[] startRow = new int[sheetNum];
+
+		for (int i = 0; i < sheetNum; i++) {
+			sheets[i] = i;
+			startRow[i] = 0;
+		}
+
+		readExcel(workbook, callback, sheets, startRow);
+	}
+
+	public static Workbook readWorkbook(File file) throws FileNotFoundException, IOException {
 		if (!file.exists())
 			throw new NullPointerException("文件[" + file.getAbsolutePath() + "]不存在");
 
