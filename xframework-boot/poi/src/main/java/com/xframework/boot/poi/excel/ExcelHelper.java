@@ -28,50 +28,51 @@ public class ExcelHelper {
 		for (int sheetIndex : sheets) {
 			Sheet sheet = workbook.getSheetAt(sheetIndex);
 
-			callback.readOneSheetBegin(sheet, sheetIndex);
+			if (callback.readOneSheetBegin(sheet, sheetIndex, startRow[sheetIndex])) {
+				int maxRows = sheet.getPhysicalNumberOfRows();
 
-			int maxRows = sheet.getPhysicalNumberOfRows();
+				for (int rowIndex = startRow[sheetIndex]; rowIndex < maxRows; rowIndex++) {
+					Row row = sheet.getRow(rowIndex);
+					if (callback.readOneRowBegin(sheet, row, sheetIndex, rowIndex)) {
 
-			for (int rowIndex = startRow[sheetIndex]; rowIndex < maxRows; rowIndex++) {
-				Row row = sheet.getRow(rowIndex);
-				callback.readOneRowBegin(sheet, row, sheetIndex, rowIndex);
+						int maxCell = row.getLastCellNum();
 
-				short lastCellNum = row.getLastCellNum();
+						for (int cellIndex = 0; cellIndex < maxCell; cellIndex++) {
+							Cell cell = row.getCell(cellIndex);
 
-				for (int cellIndex = 0; cellIndex < lastCellNum; cellIndex++) {
-					Cell cell = row.getCell(cellIndex);
+							String value = null;
 
-					callback.readOneCell(sheet, row, cell, sheetIndex, rowIndex, cellIndex);
+							// FIXME 待官方提供新的API
+							switch (cell.getCellTypeEnum()) {
+							case NUMERIC:
+								value = String.valueOf(cell.getNumericCellValue());
+								break;
+							case STRING:
+								value = cell.getStringCellValue();
+								break;
+							case FORMULA:
+								value = cell.getCellFormula();
+								break;
+							case BOOLEAN:
+								value = String.valueOf(cell.getBooleanCellValue());
+								break;
+							case ERROR:
+								value = String.valueOf(cell.getErrorCellValue());
+								break;
+							case BLANK:
+							case _NONE:
+								break;
+							}
 
-					String value = null;
+							callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex);
+						}
 
-					// FIXME 待官方提供新的API
-					switch (cell.getCellTypeEnum()) {
-					case NUMERIC:
-						value = String.valueOf(cell.getNumericCellValue());
-						break;
-					case STRING:
-						value = cell.getStringCellValue();
-						break;
-					case FORMULA:
-						value = cell.getCellFormula();
-						break;
-					case BOOLEAN:
-						value = String.valueOf(cell.getBooleanCellValue());
-						break;
-					case ERROR:
-						value = String.valueOf(cell.getErrorCellValue());
-						break;
-					case BLANK:
-					case _NONE:
-						break;
+						callback.readOneRowEnd(sheet, row, sheetIndex, rowIndex);
 					}
-					callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex);
 				}
-				callback.readOneRowEnd(sheet, row, sheetIndex, rowIndex);
-			}
 
-			callback.readOneSheetEnd(sheet, sheetIndex);
+				callback.readOneSheetEnd(sheet, sheetIndex);
+			}
 		}
 	}
 

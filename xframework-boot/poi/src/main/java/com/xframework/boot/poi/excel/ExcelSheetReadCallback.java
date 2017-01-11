@@ -11,13 +11,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 public interface ExcelSheetReadCallback {
 
 	/**
-	 * 读取一个Sheet开始
-	 * 
 	 * @param sheet
 	 * @param sheetIndex
+	 * @param startRow
+	 * @return
 	 */
-	public void readOneSheetBegin(Sheet sheet, int sheetIndex);
-	
+	public boolean readOneSheetBegin(Sheet sheet, int sheetIndex, int startRow);
+
 	/**
 	 * 读取一个Sheet结束
 	 * 
@@ -34,7 +34,7 @@ public interface ExcelSheetReadCallback {
 	 * @param sheetIndex
 	 * @param rowIndex
 	 */
-	public void readOneRowBegin(Sheet sheet, Row row, int sheetIndex, int rowIndex);
+	public boolean readOneRowBegin(Sheet sheet, Row row, int sheetIndex, int rowIndex);
 
 	/**
 	 * 读取一行数据结束
@@ -45,18 +45,6 @@ public interface ExcelSheetReadCallback {
 	 * @param rowIndex
 	 */
 	public void readOneRowEnd(Sheet sheet, Row row, int sheetIndex, int rowIndex);
-
-	/**
-	 * 读取一个格
-	 * 
-	 * @param sheet
-	 * @param row
-	 * @param cell
-	 * @param sheetIndex
-	 * @param rowIndex
-	 * @param cellIndex
-	 */
-	public void readOneCell(Sheet sheet, Row row, Cell cell, int sheetIndex, int rowIndex, int cellIndex);
 
 	/**
 	 * 读取一个格
