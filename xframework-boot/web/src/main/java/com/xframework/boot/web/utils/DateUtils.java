@@ -1,5 +1,6 @@
 package com.xframework.boot.web.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,5 +34,10 @@ public class DateUtils {
 	public static String formate(String pattern, Date date) {
 		SimpleDateFormat sdf = getSdf(pattern);
 		return sdf.format(date);
+	}
+
+	public static Date parse(String pattern, String dataStr) throws ParseException {
+		SimpleDateFormat sdf = getSdf(pattern);
+		return sdf.parse(dataStr);
 	}
 }
