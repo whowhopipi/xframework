@@ -44,29 +44,6 @@ public class ExcelHelper {
 							cell.setCellType(CellType.STRING);
 							String value = null;
 							value = cell.getStringCellValue();
-							
-//
-//							// FIXME 待官方提供新的API
-//							switch (cell.getCellTypeEnum()) {
-//							case NUMERIC:
-//								value = String.valueOf(cell.getNumericCellValue());
-//								break;
-//							case STRING:
-//								value = cell.getStringCellValue();
-//								break;
-//							case FORMULA:
-//								value = cell.getCellFormula();
-//								break;
-//							case BOOLEAN:
-//								value = String.valueOf(cell.getBooleanCellValue());
-//								break;
-//							case ERROR:
-//								value = String.valueOf(cell.getErrorCellValue());
-//								break;
-//							case BLANK:
-//							case _NONE:
-//								break;
-//							}
 
 							callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex);
 						}
