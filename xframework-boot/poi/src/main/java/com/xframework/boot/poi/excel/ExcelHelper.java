@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -40,29 +41,32 @@ public class ExcelHelper {
 						for (int cellIndex = 0; cellIndex < maxCell; cellIndex++) {
 							Cell cell = row.getCell(cellIndex);
 
+							cell.setCellType(CellType.STRING);
 							String value = null;
-
-							// FIXME 待官方提供新的API
-							switch (cell.getCellTypeEnum()) {
-							case NUMERIC:
-								value = String.valueOf(cell.getNumericCellValue());
-								break;
-							case STRING:
-								value = cell.getStringCellValue();
-								break;
-							case FORMULA:
-								value = cell.getCellFormula();
-								break;
-							case BOOLEAN:
-								value = String.valueOf(cell.getBooleanCellValue());
-								break;
-							case ERROR:
-								value = String.valueOf(cell.getErrorCellValue());
-								break;
-							case BLANK:
-							case _NONE:
-								break;
-							}
+							value = cell.getStringCellValue();
+							
+//
+//							// FIXME 待官方提供新的API
+//							switch (cell.getCellTypeEnum()) {
+//							case NUMERIC:
+//								value = String.valueOf(cell.getNumericCellValue());
+//								break;
+//							case STRING:
+//								value = cell.getStringCellValue();
+//								break;
+//							case FORMULA:
+//								value = cell.getCellFormula();
+//								break;
+//							case BOOLEAN:
+//								value = String.valueOf(cell.getBooleanCellValue());
+//								break;
+//							case ERROR:
+//								value = String.valueOf(cell.getErrorCellValue());
+//								break;
+//							case BLANK:
+//							case _NONE:
+//								break;
+//							}
 
 							callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex);
 						}

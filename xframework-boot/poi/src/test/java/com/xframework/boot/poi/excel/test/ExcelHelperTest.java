@@ -25,7 +25,7 @@ public class ExcelHelperTest {
 
 	@Test
 	public void test1() throws FileNotFoundException, IOException {
-		File file = new File("e:\\excel.xlsx");
+		File file = new File("E:/Temp/import/report/4.xlsx");
 		Workbook workbook = ExcelHelper.readWorkbook(file);
 		ExcelHelper.readExcel(workbook, new ExcelSheetReadCallbackAdapter() {
 			@Override
