@@ -14,12 +14,14 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 
 public class Generator {
 
+	final private static String CONFIG = "/generator/mapperConfigTest.xml";
+
 	public static void main(String[] args)
 			throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
 		List<String> warnings = new ArrayList<String>();
 		boolean overwrite = true;
 		ConfigurationParser cp = new ConfigurationParser(warnings);
-		Configuration config = cp.parseConfiguration(Object.class.getResourceAsStream("/configTest2.xml"));
+		Configuration config = cp.parseConfiguration(Object.class.getResourceAsStream(CONFIG));
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
 		MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
 		myBatisGenerator.generate(null);
