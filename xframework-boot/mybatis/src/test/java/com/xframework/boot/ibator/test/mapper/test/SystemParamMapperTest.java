@@ -2,8 +2,6 @@ package com.xframework.boot.ibator.test.mapper.test;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SystemParamMapperTest {
 
 	@Autowired
-	private SqlSession sqlSession;
-	@Autowired
 	private SysParamMapper sysParamMapper;
-
-	@Before
-	public void before() {
-		// sysParamMapper = sqlSession.getMapper(SysParamMapper.class);
-	}
 
 	@Test
 	public void testInsert() {
