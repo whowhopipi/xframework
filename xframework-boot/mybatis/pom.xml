@@ -8,12 +8,12 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>xframework-boot-ibator</artifactId>
+	<artifactId>xframework-boot-mybatis</artifactId>
 	<packaging>jar</packaging>
 
-	<name>xframework-boot-ibator</name>
+	<name>xframework-boot-mybatis</name>
 
-	<description>Mybatis生成工具</description>
+	<description>Mybatis支持</description>
 
 	<dependencies>
 		<dependency>

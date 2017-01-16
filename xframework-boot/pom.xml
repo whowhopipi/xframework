@@ -26,7 +26,7 @@
 		<module>test</module>
 		<module>web</module>
 		<module>poi</module>
-		<module>ibator</module>
+		<module>mybatis</module>
 	</modules>
 
 	<properties>
@@ -100,6 +100,12 @@
 			<dependency>
 				<groupId>com.xframework.boot</groupId>
 				<artifactId>xframework-boot-poi</artifactId>
+				<version>${xframework-boot.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
+				<groupId>com.xframework.boot</groupId>
+				<artifactId>xframework-boot-mybatis</artifactId>
 				<version>${xframework-boot.version}</version>
 				<type>jar</type>
 			</dependency>
