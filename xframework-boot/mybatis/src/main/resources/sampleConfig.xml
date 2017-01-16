@@ -20,6 +20,7 @@
     <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
 
 	<commentGenerator type="com.xframework.boot.mybatis.generator.plugin.XframeworkCommentGenerator">
+		<property name="suppressAllComments" value="true"/>
 	</commentGenerator>
 
     <jdbcConnection 
