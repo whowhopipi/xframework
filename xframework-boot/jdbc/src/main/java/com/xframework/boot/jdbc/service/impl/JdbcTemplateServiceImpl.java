@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.xframework.boot.jdbc.common.DbType;
 import com.xframework.boot.jdbc.service.JdbcTemplateService;
@@ -14,16 +15,16 @@ public class JdbcTemplateServiceImpl implements JdbcTemplateService {
 
 	@Value("${xframework.datasource.common.maxactive:50}")
 	private int maxActive;
-	
+
 	@Value("${xframework.datasource.common.maxidle:30}")
 	private int maxIdle;
-	
+
 	@Value("${xframework.datasource.common.minidle:10}")
 	private int minIdle;
-	
+
 	@Value("${xframework.datasource.common.autocommit:true}")
 	private boolean defaultAutoCommit;
-	
+
 	@Value("${xframework.datasource.common.testonborrow:true}")
 	private boolean testOnBorrow;
 
@@ -44,8 +45,12 @@ public class JdbcTemplateServiceImpl implements JdbcTemplateService {
 		org.apache.tomcat.jdbc.pool.DataSource ds = new org.apache.tomcat.jdbc.pool.DataSource();
 		ds.setDriverClassName(type.getDriverClassName());
 		ds.setUrl(url);
-		ds.setUsername(username);
-		ds.setPassword(password);
+		
+		if (!StringUtils.isEmpty(username))
+			ds.setUsername(username);
+		
+		if (!StringUtils.isEmpty(password))
+			ds.setPassword(password);
 
 		ds.setMaxActive(maxActive);
 		ds.setMaxIdle(maxIdle);
