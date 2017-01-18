@@ -83,10 +83,17 @@
 		<tk.mapper.version>1.0.0</tk.mapper.version>
 		<mybatis.pagehelper.version>1.0.0</mybatis.pagehelper.version>
 		<nekohtml.version>1.9.22</nekohtml.version>
+		<thymeleaf.extras.conditionalcomments>2.1.2.RELEASE</thymeleaf.extras.conditionalcomments>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.thymeleaf.extras</groupId>
+				<artifactId>thymeleaf-extras-conditionalcomments</artifactId>
+				<version>${thymeleaf.extras.conditionalcomments}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>net.sourceforge.nekohtml</groupId>
 				<artifactId>nekohtml</artifactId>
