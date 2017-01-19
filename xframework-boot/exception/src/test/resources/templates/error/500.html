@@ -11,7 +11,7 @@
 			class="icon-home"></i>Go to the homepage</a>
 	</div>
 	<div class="stack" th:style="${showTrace == true ? '' : 'display: none;'}" style="display: none;">
-		<pre th:text="${data.trace}">
+		<pre th:text="${data.trace ?: ''}">
 		</pre>
 	</div>
 	<!-- End Login Screen -->

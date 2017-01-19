@@ -12,7 +12,7 @@ import com.xframework.boot.web.vo.JsonDataVo;
 @Component
 public class XframeworkErrorAttributes extends DefaultErrorAttributes {
 
-	@Value("${xframework.error.showTrace:true}")
+	@Value("${xframework.error.showTrace:false}")
 	private boolean showTrace = true;
 	
 	@Override
@@ -23,6 +23,9 @@ public class XframeworkErrorAttributes extends DefaultErrorAttributes {
 		retJson.setData(body);
 		
 		retJson.put("showTrace", showTrace);
+		
+		retJson.setSuccess(false);
+		retJson.setRetcode("");
 
 		return retJson;
 	}
