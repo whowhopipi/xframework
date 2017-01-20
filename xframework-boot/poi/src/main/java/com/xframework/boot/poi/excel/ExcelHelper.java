@@ -19,7 +19,6 @@ public class ExcelHelper {
 	final public static String XLSX = ".xlsx";
 	final public static String XLSM = ".xlsm";
 
-	@SuppressWarnings("deprecation")
 	public static void readExcel(Workbook workbook, ExcelSheetReadCallback callback, int[] sheets, int[] startRow)
 			throws FileNotFoundException, IOException {
 		if (sheets.length != startRow.length) {
