@@ -25,6 +25,7 @@ public class XframeworkWebConfiguration {
 
 	@Bean
 	@ConditionalOnBean(TemplateEngine.class)
+	@ConditionalOnMissingBean
 	public DataAttributeDialect getApplication(TemplateEngine engine) {
 		return new DataAttributeDialect();
 	}
