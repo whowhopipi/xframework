@@ -3,6 +3,9 @@
 SRC_PATH=/home/hujh/work/GIT/xframework/xframework-boot
 REPO_PATH=/home/hujh/work/GIT/xframework/maven
 
+cd ${REPO_PATH}
+git pull
+
 cd ${SRC_PATH}
 mvn clean package install deploy -DskipTests -DaltDeploymentRepository=git-repo::default::file:D:/Workplace/GIT/xframework/maven
 
