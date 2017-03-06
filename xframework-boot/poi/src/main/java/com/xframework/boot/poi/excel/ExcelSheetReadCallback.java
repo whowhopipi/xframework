@@ -57,5 +57,5 @@ public interface ExcelSheetReadCallback {
 	 * @param rowIndex
 	 * @param cellIndex
 	 */
-	public void readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex, int cellIndex);
+	public boolean readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex, int cellIndex);
 }

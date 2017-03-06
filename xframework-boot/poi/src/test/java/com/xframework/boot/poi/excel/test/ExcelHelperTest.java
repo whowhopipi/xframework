@@ -29,9 +29,10 @@ public class ExcelHelperTest {
 		Workbook workbook = ExcelHelper.readWorkbook(file);
 		ExcelHelper.readExcel(workbook, new ExcelSheetReadCallbackAdapter() {
 			@Override
-			public void readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex,
+			public boolean readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex,
 					int cellIndex) {
 				System.out.println("第" + sheetIndex + "页，第" + rowIndex + "行，第" + cellIndex + "列，数据：" + data);
+				return true;
 			}
 		});
 	}

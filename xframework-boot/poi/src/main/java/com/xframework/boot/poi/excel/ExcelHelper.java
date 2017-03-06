@@ -44,7 +44,9 @@ public class ExcelHelper {
 							String value = null;
 							value = cell.getStringCellValue();
 
-							callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex);
+							if (!callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex)) {
+								break;
+							}
 						}
 
 						callback.readOneRowEnd(sheet, row, sheetIndex, rowIndex);

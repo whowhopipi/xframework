@@ -26,8 +26,10 @@ public class ExcelSheetReadCallbackAdapter implements ExcelSheetReadCallback {
 	}
 
 	@Override
-	public void readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex, int cellIndex) {
+	public boolean readOneCell(Sheet sheet, Row row, Cell cell, String data, int sheetIndex, int rowIndex,
+			int cellIndex) {
 		// do nothing
+		return true;
 	}
 
 }
