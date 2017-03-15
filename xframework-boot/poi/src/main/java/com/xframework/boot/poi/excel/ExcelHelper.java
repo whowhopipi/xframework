@@ -12,12 +12,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class ExcelHelper {
 
+	final static private Logger log = LoggerFactory.getLogger(ExcelHelper.class);
+	
 	final public static String XLS = ".xls";
 	final public static String XLSX = ".xlsx";
 	final public static String XLSM = ".xlsm";
