@@ -13,6 +13,9 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class ExcelHelper {
 
 	final public static String XLS = ".xls";
@@ -40,9 +43,13 @@ public class ExcelHelper {
 						for (int cellIndex = 0; cellIndex < maxCell; cellIndex++) {
 							Cell cell = row.getCell(cellIndex);
 
-							cell.setCellType(CellType.STRING);
 							String value = null;
-							value = cell.getStringCellValue();
+							if (cell == null) {
+								log.warn("第{}行第{}列，表格为空", rowIndex + 1, cellIndex + 1);
+							} else {
+								cell.setCellType(CellType.STRING);
+								value = cell.getStringCellValue();
+							}
 
 							if (!callback.readOneCell(sheet, row, cell, value, sheetIndex, rowIndex, cellIndex)) {
 								break;
