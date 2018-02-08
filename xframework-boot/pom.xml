@@ -125,12 +125,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>net.sourceforge.nekohtml</groupId>
-				<artifactId>nekohtml</artifactId>
-				<version>${nekohtml.version}</version>
-			</dependency>
-
-			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
 				<artifactId>mybatis-spring-boot-starter</artifactId>
 				<version>${mybatis.boot.version}</version>
@@ -261,6 +255,18 @@
 						<phase>compile</phase>
 						<goals>
 							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
 						</goals>
 					</execution>
 				</executions>
