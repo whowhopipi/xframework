@@ -2,7 +2,7 @@ package com.xframework.boot.web.vo;
 
 import java.util.List;
 
-public class JsonListVo extends JsonDataVo<List<?>> {
+public class JsonListVo<T> extends JsonDataVo<List<T>> {
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class JsonListVo extends JsonDataVo<List<?>> {
 	}
 
 	@Override
-	public void setData(List<?> data) {
+	public void setData(List<T> data) {
 		if(data == null) {
 			setCurrentNum(0);
 		} else {

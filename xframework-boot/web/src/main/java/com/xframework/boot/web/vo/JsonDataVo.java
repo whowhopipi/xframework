@@ -9,19 +9,19 @@ public class JsonDataVo<T> extends HashMap<String, Object> implements Serializab
 	 * 
 	 */
 	private static final long serialVersionUID = -4645573912800978995L;
-	
+
 	final protected static String KEY_SUCCESS = "success";
 	final protected static String KEY_MESSAGE = "message";
 	final protected static String KEY_RETCODE = "retcode";
 	final protected static String KEY_DATA = "data";
-	
+
 	final protected static String SUCCESS_RETCODE = "000000";
 
 	public JsonDataVo() {
 		setSuccess(true);
 		setRetcode(SUCCESS_RETCODE);
 	}
-	
+
 	public boolean isSuccess() {
 		return (Boolean) get(KEY_SUCCESS);
 	}
@@ -55,4 +55,18 @@ public class JsonDataVo<T> extends HashMap<String, Object> implements Serializab
 		put(KEY_DATA, data);
 	}
 
+	public static <M> JsonDataVo<M> success(M data) {
+		JsonDataVo<M> ret = new JsonDataVo<>();
+		ret.setData(data);
+		return ret;
+	}
+
+	public static <M> JsonDataVo<M> fail(String code, String message, M data) {
+		JsonDataVo<M> ret = new JsonDataVo<>();
+		ret.setData(data);
+		ret.setSuccess(false);
+		ret.setRetcode(code);
+		ret.setMessage(message);
+		return ret;
+	}
 }
