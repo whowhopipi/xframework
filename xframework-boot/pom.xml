@@ -216,7 +216,7 @@
 				<artifactId>xframework-boot-mybatis</artifactId>
 				<version>${xframework-boot.version}</version>
 				<type>jar</type>
-				<classifier>test</classifier>
+				<classifier>tests</classifier>
 				<scope>test</scope>
 			</dependency>
 
