@@ -1,3 +1,14 @@
 /RemoteSystemsTempFiles/
 /.metadata/
 /.recommenders
+/xframework-boot/exception/*.iml
+/xframework-boot/jdbc/*.iml
+/xframework-boot/kaptcha/*.iml
+/xframework-boot/mybatis/*.iml
+/xframework-boot/poi/*.iml
+/xframework-boot/security/*.iml
+/xframework-boot/stat/*.iml
+/xframework-boot/test/*.iml
+/xframework-boot/web/*.iml
+/xframework-boot/*.iml
+/xframework-boot/target
