@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 
-import com.xframework.boot.web.vo.JsonDataVo;
+import com.xframework.boot.web.vo.JsonDataResponseVo;
 
 @Component
 public class XframeworkErrorAttributes extends DefaultErrorAttributes {
@@ -19,7 +19,7 @@ public class XframeworkErrorAttributes extends DefaultErrorAttributes {
 	public Map<String, Object> getErrorAttributes(RequestAttributes requestAttributes, boolean includeStackTrace) {
 		Map<String, Object> body = super.getErrorAttributes(requestAttributes, includeStackTrace);
 
-		JsonDataVo<Map<String, Object>> retJson = new JsonDataVo<>();
+		JsonDataResponseVo<Map<String, Object>> retJson = new JsonDataResponseVo<>();
 		retJson.setData(body);
 
 		retJson.put("showTrace", showTrace);
