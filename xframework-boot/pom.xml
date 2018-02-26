@@ -206,6 +206,12 @@
 				<type>jar</type>
 			</dependency>
 			<dependency>
+				<groupId>com.xframework.boot</groupId>
+				<artifactId>xframework-boot-utils</artifactId>
+				<version>${xframework-boot.version}</version>
+				<type>jar</type>
+			</dependency>
+			<dependency>
 				<groupId>com.github.axet</groupId>
 				<artifactId>kaptcha</artifactId>
 				<version>${kaptcha.version}</version>
