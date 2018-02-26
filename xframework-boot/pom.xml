@@ -27,6 +27,7 @@
 		<module>web</module>
 		<module>poi</module>
 		<module>mybatis</module>
+        <module>utils</module>
 	</modules>
 
 	<properties>
@@ -60,6 +61,10 @@
 	</properties>
 
 	<dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
