@@ -10,68 +10,52 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 实现前访问日志、后访问日志。
- * 
- * @author Future
- * @date 2015年8月13日
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccessLog implements Serializable {
 	private static final long serialVersionUID = XframeworkApplication.SERIAL_VERSION;
 
-	public static final short TYPE_BEFORE = 0;
-	public static final short TYPE_AFTER = 1;
-
 	private String id;
-
-	private Short type;
-
-	private Timestamp logTime;
-
-	private String seqid;
-
-	private String sessionId;
-
-	private String sessionUser;
-
-	private String scheme;
-
-	private String serverName;
-
-	private Integer serverPort;
 
 	private String uri;
 
-	private String queryString;
-
-	private String contextPath;
-
 	private String method;
 
+    /**
+     * 访问服务器IP
+     */
 	private String sip;
 
+    /**
+     * 访问服务器域名
+     */
 	private String shost;
 
+    /**
+     * 访问服务器端口
+     */
 	private Integer sport;
 
+    /**
+     * 访问客户端IP
+     */
 	private String cip;
 
+    /**
+     * 访问客户端域名
+     */
 	private String chost;
 
+    /**
+     * 访问客户端端口
+     */
 	private Integer cport;
 
+    /**
+     * 访问协议
+     */
 	private String protocol;
-
-	private String authType;
-
-	private String remoteUser;
-
-	private String principal;
-
-	private String reqEncoding;
 
 	private String reqContentType;
 
@@ -91,11 +75,18 @@ public class AccessLog implements Serializable {
 
 	private Timestamp endTime;
 
-	private Long proLong;
+    /**
+     * 执行时间
+     */
+	private Long execTime;
 
 	private List<AccessHeader> reqHeaders;
 	private List<AccessParam> reqParams;
 	private List<AccessCookie> reqCookies;
 	private List<AccessHeader> respHeaders;
+
+    private String userId;
+
+    private String userName;
 
 }

@@ -6,36 +6,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * 请求Cookie。
- * 
- * @author Future
- * @date 2015年8月14日
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccessCookie implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String id;
+    private String id;
 
-	private String lid;
+    private String lid;
 
-	private String domain;
+    private String domain;
 
-	private String path;
+    private String path;
 
-	private String name;
+    private String name;
 
-	private String value;
+    private String value;
 
-	private Integer maxAge;
+    private Integer maxAge;
 
-	private Boolean secure;
+    private Boolean secure;
 
-	private String comment;
+    private String comment;
 
-	private Integer version;
+    private Integer version;
 
 }
