@@ -12,6 +12,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ import java.util.UUID;
 @Aspect
 @Order(5)
 @Slf4j
+@Component
 public class SystemLogAspect {
 
     @Autowired
-    private LogPersistentService logPersistent;
+    private List<LogPersistentService> logPersistents;
     @Autowired
     private UserService userService;
 
@@ -40,13 +42,15 @@ public class SystemLogAspect {
     }
 
 
-    @Before("webLog()")
-    public void doBefore(JoinPoint joinPoint) {
+    @Before("webLog() && @annotation(systemLogAnnotion)")
+    public void doBefore(JoinPoint joinPoint,com.xframework.boot.stat.annotation.SystemLog systemLogAnnotion) {
         SystemLog systemLog = new SystemLog();
         systemLog.setBeginTime(new Timestamp(System.currentTimeMillis()));
         systemLog.setId(generateUUID());
         systemLog.setClazz(joinPoint.getTarget().getClass().getName());
         systemLog.setMethod(joinPoint.getSignature().getName());
+        systemLog.setModule(systemLogAnnotion.module());
+        systemLog.setSubModule(systemLogAnnotion.subModule());
 
         // 获取当前用户
         User currentUser = userService.getCurrentUser();
@@ -93,17 +97,31 @@ public class SystemLogAspect {
         SystemLogParam logParam = new SystemLogParam();
         logParam.setId(generateUUID());
         logParam.setLid(systemLog.getId());
-        logParam.setClazz(object.getClass().getName());
-        try {
-            logParam.setValue(mapper.writeValueAsString(object));
-        } catch (JsonProcessingException e) {
-            log.warn("转换成JSON格式出错", e);
+
+        if(object != null) {
+            logParam.setClazz(object.getClass().getName());
+            try {
+                logParam.setValue(mapper.writeValueAsString(object));
+            } catch (JsonProcessingException e) {
+                log.warn("转换成JSON格式出错", e);
+            }
         }
+
         return logParam;
     }
 
     private void logPersistent() {
-        logPersistent.persistentSystemLog(systemLogThreadLocal.get());
+        SystemLog systemLogEntity = systemLogThreadLocal.get();
+        // 设置结束时间
+        systemLogEntity.setEndTime(new Timestamp(System.currentTimeMillis()));
+        // 设置执行时间
+        systemLogEntity.setExeTime(systemLogEntity.getEndTime().getTime() - systemLogEntity.getBeginTime().getTime());
+
+        if(logPersistents != null && !logPersistents.isEmpty()) {
+            for(LogPersistentService logPersistent : logPersistents) {
+                logPersistent.persistentSystemLog(systemLogThreadLocal.get());
+            }
+        }
     }
 
 }

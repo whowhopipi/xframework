@@ -18,7 +18,7 @@ public class LogInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
     @Autowired
-    private LogPersistentService logPersistentService;
+    private List<LogPersistentService> logPersistentServices;
 
     private ThreadLocal<AccessLog> accessLogThreadLocal = new ThreadLocal<>();
 
@@ -141,7 +141,11 @@ public class LogInterceptor implements HandlerInterceptor {
             }
         }
 
-        logPersistentService.persistentWebLog(accessLog);
+        if(logPersistentServices !=null && !logPersistentServices.isEmpty()) {
+            for(LogPersistentService logPersistentService : logPersistentServices) {
+                logPersistentService.persistentWebLog(accessLog);
+            }
+        }
     }
 
 }
