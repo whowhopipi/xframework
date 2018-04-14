@@ -53,7 +53,7 @@ public class DefaultLogPersistentServiceImpl implements LogPersistentService {
     }
 
     @Override
-    public void persistentSystemLog(SystemLog systemLog) {
+    public void persistentSystemLog(SystemLogEntity systemLog) {
         writeLog("[{}][{}][{}].[{}][执行{}ms][{}][{}]",
                 systemLog.getModule(),
                 systemLog.getSubModule(),
@@ -65,19 +65,19 @@ public class DefaultLogPersistentServiceImpl implements LogPersistentService {
 
         if (systemLog.getRequestParam() != null && !systemLog.getRequestParam().isEmpty()) {
             writeLog("----请求参数");
-            for (SystemLogParam param : systemLog.getRequestParam()) {
+            for (SystemLogParamEntity param : systemLog.getRequestParam()) {
                 writeLog("----[{}][{}][{}]", param.getClazz(), param.getName(), param.getValue());
             }
         }
 
         if (systemLog.getReturnParam() != null) {
-            SystemLogParam param = systemLog.getReturnParam();
+            SystemLogParamEntity param = systemLog.getReturnParam();
             writeLog("----返回数据");
             writeLog("----[{}][{}][{}]", param.getClazz(), param.getName(), param.getValue());
         }
 
         if (systemLog.getException() != null) {
-            SystemLogParam param = systemLog.getException();
+            SystemLogParamEntity param = systemLog.getException();
             writeLog("----出现异常");
             writeLog("----[{}][{}][{}]", param.getClazz(), param.getName(), param.getValue());
         }

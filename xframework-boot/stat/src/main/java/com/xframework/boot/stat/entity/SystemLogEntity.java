@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SystemLog {
+public class SystemLogEntity {
 
     private String id;
 
@@ -26,6 +26,11 @@ public class SystemLog {
      * 子模块名
      */
     private String subModule;
+
+    /**
+     * 关键字
+     */
+    private String keyword;
 
     private String clazz;
 
@@ -43,17 +48,17 @@ public class SystemLog {
     /**
      * 请求参数
      */
-    private List<SystemLogParam> requestParam;
+    private List<SystemLogParamEntity> requestParam;
 
     /**
      * 返回参数
      */
-    private SystemLogParam returnParam;
+    private SystemLogParamEntity returnParam;
 
     /**
      * 异常
      */
-    private SystemLogParam exception;
+    private SystemLogParamEntity exception;
 
     /**
      * 用户ID

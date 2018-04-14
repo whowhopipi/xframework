@@ -21,4 +21,9 @@ public @interface SystemLog {
      */
     String subModule() default "";
 
+    /**
+     * 关键字
+     * @return
+     */
+    String keyword() default "";
 }

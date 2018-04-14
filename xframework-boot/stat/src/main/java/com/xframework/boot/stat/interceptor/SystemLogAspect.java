@@ -2,8 +2,8 @@ package com.xframework.boot.stat.interceptor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xframework.boot.stat.entity.SystemLog;
-import com.xframework.boot.stat.entity.SystemLogParam;
+import com.xframework.boot.stat.entity.SystemLogEntity;
+import com.xframework.boot.stat.entity.SystemLogParamEntity;
 import com.xframework.boot.stat.entity.User;
 import com.xframework.boot.stat.service.LogPersistentService;
 import com.xframework.boot.stat.service.UserService;
@@ -31,7 +31,7 @@ public class SystemLogAspect {
     private UserService userService;
 
     private ObjectMapper mapper = new ObjectMapper();
-    private ThreadLocal<SystemLog> systemLogThreadLocal = new ThreadLocal<>();
+    private ThreadLocal<SystemLogEntity> systemLogThreadLocal = new ThreadLocal<>();
 
     @Pointcut("@annotation(com.xframework.boot.stat.annotation.SystemLog)")
     public void webLog() {
@@ -44,7 +44,7 @@ public class SystemLogAspect {
 
     @Before("webLog() && @annotation(systemLogAnnotion)")
     public void doBefore(JoinPoint joinPoint,com.xframework.boot.stat.annotation.SystemLog systemLogAnnotion) {
-        SystemLog systemLog = new SystemLog();
+        SystemLogEntity systemLog = new SystemLogEntity();
         systemLog.setBeginTime(new Timestamp(System.currentTimeMillis()));
         systemLog.setId(generateUUID());
         systemLog.setClazz(joinPoint.getTarget().getClass().getName());
@@ -59,14 +59,12 @@ public class SystemLogAspect {
             systemLog.setUserName(currentUser.getName());
         }
 
-        List<SystemLogParam> requestParam = new ArrayList<>();
+        List<SystemLogParamEntity> requestParam = new ArrayList<>();
         //获取传入目标方法的参数
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {
             requestParam.add(createParam(args[i]));
         }
-        systemLog.setRequestParam(requestParam);
-
         systemLog.setRequestParam(requestParam);
     }
 
@@ -92,9 +90,9 @@ public class SystemLogAspect {
         logPersistent();
     }
 
-    private SystemLogParam createParam(Object object) {
-        SystemLog systemLog = systemLogThreadLocal.get();
-        SystemLogParam logParam = new SystemLogParam();
+    private SystemLogParamEntity createParam(Object object) {
+        SystemLogEntity systemLog = systemLogThreadLocal.get();
+        SystemLogParamEntity logParam = new SystemLogParamEntity();
         logParam.setId(generateUUID());
         logParam.setLid(systemLog.getId());
 
@@ -111,7 +109,7 @@ public class SystemLogAspect {
     }
 
     private void logPersistent() {
-        SystemLog systemLogEntity = systemLogThreadLocal.get();
+        SystemLogEntity systemLogEntity = systemLogThreadLocal.get();
         // 设置结束时间
         systemLogEntity.setEndTime(new Timestamp(System.currentTimeMillis()));
         // 设置执行时间

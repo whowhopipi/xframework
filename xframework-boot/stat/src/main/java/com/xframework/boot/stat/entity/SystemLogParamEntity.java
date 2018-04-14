@@ -3,7 +3,7 @@ package com.xframework.boot.stat.entity;
 import lombok.Data;
 
 @Data
-public class SystemLogParam {
+public class SystemLogParamEntity {
 
     private String id;
 

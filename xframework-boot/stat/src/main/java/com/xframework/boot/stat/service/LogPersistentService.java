@@ -1,7 +1,7 @@
 package com.xframework.boot.stat.service;
 
 import com.xframework.boot.stat.entity.AccessLog;
-import com.xframework.boot.stat.entity.SystemLog;
+import com.xframework.boot.stat.entity.SystemLogEntity;
 
 /**
  * 日志持久化服务
@@ -20,6 +20,6 @@ public interface LogPersistentService {
      *
      * @param log
      */
-    void persistentSystemLog(SystemLog log);
+    void persistentSystemLog(SystemLogEntity log);
 
 }
